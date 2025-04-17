@@ -71,38 +71,3 @@ class WhiteRegionDetector:
         cv2.drawContours(
             self.mask, [self.largest_contour], -1, 255, thickness=cv2.FILLED
         )
-
-    def _display_results(self) -> None:
-        """Muestra resultados intermedios usando matplotlib."""
-        plt.figure(figsize=(12, 4))
-
-        plt.subplot(1, 3, 1)
-        plt.imshow(self.gray_image, cmap='gray')
-        plt.title('Escala de grises')
-        plt.axis('off')
-
-        plt.subplot(1, 3, 2)
-        plt.imshow(self.binary_image, cmap='gray')
-        plt.title('Binarización')
-        plt.axis('off')
-
-        plt.subplot(1, 3, 3)
-        plt.imshow(self.mask, cmap='gray')
-        plt.title('Región detectada')
-        plt.axis('off')
-
-        plt.tight_layout()
-        plt.show()
-
-    def process(self) -> np.ndarray:
-        """
-        Ejecuta el pipeline completo de procesamiento.
-
-        Returns:
-            Máscara binaria de la región detectada
-        """
-        self._load_image()
-        self._binarize_image()
-        self._find_largest_contour()
-        self._display_results()
-        return self.mask
