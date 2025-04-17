@@ -52,3 +52,22 @@ class WhiteRegionDetector:
         _, self.binary_image = cv2.threshold(
             self.gray_image, self.threshold, 255, cv2.THRESH_BINARY
         )
+
+    def _find_largest_contour(self) -> None:
+        """Identifica el contorno de mayor área en la imagen binaria."""
+        contours, _ = cv2.findContours(
+            self.binary_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+        )
+
+        if not contours:
+            raise ValueError("No se encontraron contornos en la imagen")
+
+        self.largest_contour = max(contours, key=cv2.contourArea)
+        self._create_mask()
+
+    def _create_mask(self) -> None:
+        """Genera máscara binaria del área detectada."""
+        self.mask = np.zeros_like(self.binary_image)
+        cv2.drawContours(
+            self.mask, [self.largest_contour], -1, 255, thickness=cv2.FILLED
+        )

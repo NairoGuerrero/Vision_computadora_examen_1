@@ -49,3 +49,13 @@ class CrackDetectionPipeline:
         blurred = cv2.blur(self.gray_image, (3, 3))
         log_transformed = self._apply_log_transform(blurred)
         self.edges = self._enhance_edges(log_transformed)
+
+    def _apply_log_transform(self, image: np.ndarray) -> np.ndarray:
+        """Aplica transformación logarítmica para mejorar el contraste."""
+        normalized = (np.log(image + 1) / np.log(1 + np.max(image))) * 255
+        return normalized.astype(np.uint8)
+
+    def _enhance_edges(self, image: np.ndarray) -> np.ndarray:
+        """Realza bordes usando filtrado bilateral y detección Canny."""
+        bilateral = cv2.bilateralFilter(image, 4, 90, 90)
+        return cv2.Canny(bilateral, 82, 172)
