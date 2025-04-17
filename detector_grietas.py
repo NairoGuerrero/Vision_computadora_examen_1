@@ -59,3 +59,17 @@ class CrackDetectionPipeline:
         """Realza bordes usando filtrado bilateral y detección Canny."""
         bilateral = cv2.bilateralFilter(image, 4, 90, 90)
         return cv2.Canny(bilateral, 82, 172)
+
+    def _apply_morphology(self) -> None:
+        """Mejora la conectividad de bordes con operaciones morfológicas."""
+        kernel = np.ones((8, 8), np.uint8)
+        self.edges = cv2.dilate(self.edges, kernel, iterations=2)
+        self.edges = cv2.morphologyEx(self.edges, cv2.MORPH_CLOSE, kernel)
+
+    def _detect_orb_features(self) -> None:
+        """Detecta características ORB en los bordes procesados."""
+        orb = cv2.ORB_create(nfeatures=self.orb_features)
+        self.keypoints, self.descriptors = orb.detectAndCompute(self.edges, None)
+        self.features_image = cv2.drawKeypoints(
+            self.edges, self.keypoints, None, flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS
+        )
