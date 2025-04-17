@@ -1,0 +1,51 @@
+"""
+Módulo para detección de grietas en superficies usando procesamiento de imágenes.
+
+Combina técnicas de preprocesamiento, detección de bordes y extracción de características
+para identificar posibles áreas dañadas.
+"""
+
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+from typing import Tuple
+
+
+class CrackDetectionPipeline:
+    """
+    Pipeline completo para detección y análisis de grietas.
+
+    Atributos:
+        image_path (str): Ruta de la imagen a analizar
+        orb_features (int): Número de características ORB a detectar
+    """
+
+    def __init__(self, image_path: str, orb_features: int = 1500):
+        """
+        Inicializa el pipeline con parámetros de configuración.
+
+        Args:
+            image_path: Ruta a la imagen de entrada
+            orb_features: Cantidad máxima de características ORB (default: 1500)
+        """
+        self.image_path = image_path
+        self.orb_features = orb_features
+        self.original_image = None
+        self.gray_image = None
+        self.edges = None
+        self.keypoints = None
+        self.descriptors = None
+        self.features_image = None
+
+    def _load_image(self) -> None:
+        """Carga y convierte la imagen a escala de grises."""
+        self.original_image = cv2.imread(self.image_path)
+        if self.original_image is None:
+            raise FileNotFoundError(f"Imagen no encontrada: {self.image_path}")
+        self.gray_image = cv2.cvtColor(self.original_image, cv2.COLOR_BGR2GRAY)
+
+    def _preprocess_image(self) -> None:
+        """Aplica secuencia de preprocesamiento para realzar características."""
+        blurred = cv2.blur(self.gray_image, (3, 3))
+        log_transformed = self._apply_log_transform(blurred)
+        self.edges = self._enhance_edges(log_transformed)
