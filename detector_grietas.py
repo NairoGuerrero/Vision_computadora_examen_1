@@ -73,3 +73,44 @@ class CrackDetectionPipeline:
         self.features_image = cv2.drawKeypoints(
             self.edges, self.keypoints, None, flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS
         )
+
+    def _display_results(self) -> None:
+        """Muestra resultados del proceso de detección."""
+        plt.figure(figsize=(10, 5))
+
+        plt.subplot(1, 2, 1)
+        plt.imshow(cv2.cvtColor(self.original_image, cv2.COLOR_BGR2RGB))
+        plt.title('Imagen Original')
+        plt.axis('off')
+
+        plt.subplot(1, 2, 2)
+        plt.imshow(self.features_image, cmap='gray')
+        plt.title('Características Detectadas')
+        plt.axis('off')
+
+        plt.tight_layout()
+        plt.show()
+
+    def execute(self) -> np.ndarray:
+        """
+        Ejecuta el pipeline completo de detección.
+
+        Returns:
+            Imagen binaria con bordes detectados
+        """
+        self._load_image()
+        self._preprocess_image()
+        self._apply_morphology()
+        self._detect_orb_features()
+        self._display_results()
+        return self.edges
+
+
+def main():
+    """Función de demostración del módulo."""
+    detector = CrackDetectionPipeline('imagenes/img_4.jpg')
+    _ = detector.execute()
+
+
+if __name__ == '_main_':
+    main()
