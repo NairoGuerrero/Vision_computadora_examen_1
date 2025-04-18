@@ -45,3 +45,26 @@ class StructuralHealthAnalyzer:
         self._wall_image = cv2.imread(self.image_path)
         if self._wall_image is None:
             raise FileNotFoundError(f"Imagen no encontrada: {self.image_path}")
+
+    def _execute_single_analysis(self) -> None:
+        """Ejecuta el análisis de componentes conexas una sola vez."""
+        _, self._regions = self._components_analyzer.analyze()
+        self._reference_component = max(self._regions, key=lambda r: r.area)
+
+    def _calculate_conversion_factor(self) -> None:
+        """Calcula factor de conversión píxeles a cm²."""
+        reference_area_cm = self.reference_width * self.reference_height
+        self._conversion_factor = reference_area_cm / self._reference_component.area
+
+    def _calculate_total_areas(self) -> None:
+        """Calcula áreas totales y dañadas."""
+        height, width = self._wall_image.shape[:2]
+        pixel_wall_area = height * width
+        self._total_wall_area = pixel_wall_area * self._conversion_factor
+
+        # Filtrar regiones excluyendo la referencia
+        self._damaged_areas = [
+            r.area * self._conversion_factor
+            for r in self._regions
+            if r != self._reference_component
+        ]
