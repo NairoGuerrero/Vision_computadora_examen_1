@@ -82,3 +82,19 @@ class ConnectedComponentsAnalyzer:
                 cv2.FONT_HERSHEY_SIMPLEX,
                 0.5, (255, 0, 0), 2
             )
+
+    def analyze(self) -> Tuple[cv2.Mat, List[regionprops]]:
+        """
+        Ejecuta el pipeline completo de análisis.
+
+        Returns:
+            Tuple con:
+                - Imagen anotada con las regiones detectadas
+                - Lista de propiedades de las regiones
+        """
+        self._load_binary_image()
+        self._label_regions()
+        self._extract_region_properties()
+        self._annotate_image()
+        self._print_region_stats()
+        return self._annotated_image, self.regions
