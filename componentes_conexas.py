@@ -37,7 +37,7 @@ class ConnectedComponentsAnalyzer:
 
     def _load_binary_image(self) -> None:
         """Carga y procesa la imagen binaria usando el módulo mixer."""
-        from combinar import MaskCombiner
+        from mixer import MaskCombiner
         combiner = MaskCombiner(self.image_path)
         self._binary_image = combiner.combine_masks(True)
 
