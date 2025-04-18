@@ -41,3 +41,48 @@ class MaskCombiner:
         """Ejecuta el detector de referencia y almacena su máscara resultante."""
         reference_extractor = WhiteRegionDetector(self.image_path)
         self.reference_mask = reference_extractor.process()
+
+    def combine_masks(self, show_combined: bool = False) -> cv2.Mat:
+        """
+        Combina las máscaras mediante operación OR y opcionalmente muestra el resultado.
+
+        Args:
+            show_combined: Bandera para mostrar visualización de la máscara combinada
+
+        Returns:
+            Matriz OpenCV con la máscara combinada
+        """
+        self._detect_cracks()
+        self._detect_reference()
+
+        combined = cv2.bitwise_or(self.crack_mask, self.reference_mask)
+
+        if show_combined:
+            self._display_combined_mask(combined)
+
+        return combined
+
+    @staticmethod
+    def _display_combined_mask(mask: cv2.Mat) -> None:
+        """
+        Muestra la máscara combinada usando matplotlib.
+
+        Args:
+            mask: Máscara binaria a visualizar
+        """
+        plt.figure(figsize=(10, 5))
+        plt.imshow(mask, cmap='gray')
+        plt.title('Regiones combinadas: grietas + hoja')
+        plt.axis('off')
+        plt.tight_layout()
+        plt.show()
+
+
+def main():
+    """Función principal para demostración del módulo."""
+    combiner = MaskCombiner('imagenes/img_1.jpg')
+    _ = combiner.combine_masks(show_combined=True)
+
+
+if __name__ == '_main_':
+    main()
