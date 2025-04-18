@@ -106,3 +106,29 @@ class WhiteRegionDetector:
         self._find_largest_contour()
         self._display_results()
         return self.mask
+
+    def get_bounding_box(self) -> Optional[Tuple[int, int, int, int]]:
+        """
+        Obtiene las coordenadas del bounding box de la región detectada.
+
+        Returns:
+            Tupla (x, y, ancho, alto) o None si no hay detección
+        """
+        if self.largest_contour is not None:
+            return cv2.boundingRect(self.largest_contour)
+        return None
+
+
+def main():
+    """Función de demostración del módulo."""
+    detector = WhiteRegionDetector('imagenes/img_1.jpg', threshold=150)
+    detector.process()
+
+    bbox = detector.get_bounding_box()
+    if bbox:
+        x, y, w, h = bbox
+        print(f"Región de referencia detectada en: x={x}, y={y}, ancho={w}, alto={h}")
+
+
+if __name__ == '_main_':
+    main()
