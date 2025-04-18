@@ -112,3 +112,15 @@ class ConnectedComponentsAnalyzer:
             print(f"Solidez: {region.solidity:.2f}")
             print(f"Orientación: {region.orientation:.2f} rad")
             print(f"Ejes elipse: Mayor={region.major_axis_length:.2f}, Menor={region.minor_axis_length:.2f}")
+    
+    def save_results(self, output_path: str = 'figuras_detectadas_.jpg') -> None:
+        """
+        Guarda la imagen anotada en disco.
+
+        Args:
+            output_path: Ruta de salida para la imagen (default: 'figuras_detectadas.jpg')
+        """
+        if self._annotated_image is not None:
+            cv2.imwrite(output_path, self._annotated_image)
+        else:
+            raise ValueError("Primero debe ejecutar el análisis con el método analyze()")
