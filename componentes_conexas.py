@@ -9,6 +9,7 @@ y generación de visualizaciones con anotaciones.
 import cv2
 from skimage.measure import label, regionprops
 from typing import Tuple, List
+from mixer import MaskCombiner
 
 
 class ConnectedComponentsAnalyzer:
@@ -37,7 +38,6 @@ class ConnectedComponentsAnalyzer:
 
     def _load_binary_image(self) -> None:
         """Carga y procesa la imagen binaria usando el módulo mixer."""
-        from combinar import MaskCombiner
         combiner = MaskCombiner(self.image_path)
         self._binary_image = combiner.combine_masks(True)
 

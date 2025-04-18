@@ -6,7 +6,7 @@ optimizado para evitar ejecuciones duplicadas.
 """
 
 import cv2
-from comp_conexas import ConnectedComponentsAnalyzer
+from componentes_conexas import ConnectedComponentsAnalyzer
 from skimage.measure import regionprops
 
 

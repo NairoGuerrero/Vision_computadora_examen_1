@@ -7,8 +7,8 @@ la combinación resultante.
 
 import matplotlib.pyplot as plt
 import cv2
-from grietas import CrackDetectionPipeline
-from referencia import WhiteRegionDetector
+from detector_grietas import CrackDetectionPipeline
+from detector_referencia import WhiteRegionDetector
 
 
 class MaskCombiner:
