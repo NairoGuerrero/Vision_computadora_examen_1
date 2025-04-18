@@ -98,3 +98,17 @@ class ConnectedComponentsAnalyzer:
         self._annotate_image()
         self._print_region_stats()
         return self._annotated_image, self.regions
+
+    def _print_region_stats(self) -> None:
+        """Imprime estadísticas detalladas de cada región."""
+        for idx, region in enumerate(self.regions):
+            print(f"\n--- Objeto {idx + 1} ---")
+            print(f"Área: {region.area}")
+            print(f"Perímetro: {region.perimeter:.2f}")
+            print(f"Centroide: {region.centroid}")
+            print(f"BBox: {region.bbox}")
+            print(f"Relación aspecto: {region.bbox_area / region.area:.2f}")
+            print(f"Extensión: {region.extent:.2f}")
+            print(f"Solidez: {region.solidity:.2f}")
+            print(f"Orientación: {region.orientation:.2f} rad")
+            print(f"Ejes elipse: Mayor={region.major_axis_length:.2f}, Menor={region.minor_axis_length:.2f}")
