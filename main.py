@@ -68,3 +68,31 @@ class StructuralHealthAnalyzer:
             for r in self._regions
             if r != self._reference_component
         ]
+    def _compute_health_metrics(self) -> tuple[float, float]:
+        """Calcula métricas finales de salud."""
+        total_damaged = sum(self._damaged_areas)
+        wall_health = ((self._total_wall_area - total_damaged) / self._total_wall_area) * 100
+        return total_damaged, wall_health
+
+    def analyze(self) -> None:
+        """Flujo principal de análisis optimizado."""
+        self._load_wall_image()
+        self._execute_single_analysis()  # Análisis único
+        self._calculate_conversion_factor()
+        self._calculate_total_areas()
+        total_damaged, wall_health = self._compute_health_metrics()
+
+        print("\n=== Resultados Optimizados ===")
+        print(f"Área total dañada: {total_damaged:.2f} cm²")
+        print(f"Área total de la pared: {self._total_wall_area:.2f} cm²")
+        print(f"Salud estructural estimada: {wall_health:.2f}%")
+
+
+def main():
+    """Función demostración del análisis optimizado."""
+    analyzer = StructuralHealthAnalyzer('imagenes/img_1.jpg')
+    analyzer.analyze()
+
+
+if __name__ == '__main__':
+    main()
