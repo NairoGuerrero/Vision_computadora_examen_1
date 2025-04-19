@@ -124,3 +124,17 @@ class ConnectedComponentsAnalyzer:
             cv2.imwrite(output_path, self._annotated_image)
         else:
             raise ValueError("Primero debe ejecutar el análisis con el método analyze()")
+
+def main():
+    """Función de demostración del módulo."""
+    analyzer = ConnectedComponentsAnalyzer('imagenes/img_4.jpg')
+    annotated_img, regions = analyzer.analyze()
+    analyzer.save_results()
+
+    cv2.imshow('Resultado', annotated_img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
+if __name__ == '__main__':
+    main()
