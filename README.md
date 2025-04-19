@@ -26,14 +26,19 @@ Este repositorio contiene la solución al examen práctico de la asignatura de V
    ```
 
 ## ▶️ Uso
+Asegúrate de que la carpeta `imagenes/` contenga las imágenes necesarias para cada módulo.
 
 Puedes ejecutar el análisis completo con:
 
 ```bash
 python main.py
 ```
+Si se quiere ejecutar cada modulo por separado lo puede a hacer con:
 
-Asegúrate de que la carpeta `imagenes/` contenga las imágenes necesarias para cada módulo.
+```bash
+python Nombre_Modulo.py
+```
+
 
 ## 👥 Autores
 
