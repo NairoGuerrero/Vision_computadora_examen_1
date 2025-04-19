@@ -39,7 +39,7 @@ Asegúrate de que la carpeta `imagenes/` contenga las imágenes necesarias para 
 
 - **Nairo Guerrero Márquez** - [nairo.guerrero@utp.edu.co](mailto:nairo.guerrero@utp.edu.co)
 - **Juan David Perdomo Quintero** - [juandavid.perdomo@utp.edu.co](mailto:juandavid.perdomo@utp.edu.co)
-- **[Nombre del Autor 3]** - [correo3@ejemplo.com](mailto:correo3@ejemplo.com)
+- **Andres Felipe Zambrano Torres** - [a.zambrano1@utp.edu.co](mailto:a.zambrano1@utp.edu.co)
 - **[Nombre del Autor 4]** - [correo4@ejemplo.com](mailto:correo4@ejemplo.com)
 - **[Nombre del Autor 5]** - [correo5@ejemplo.com](mailto:correo5@ejemplo.com)
 - **[Nombre del Autor 6]** - [correo6@ejemplo.com](mailto:correo6@ejemplo.com)
