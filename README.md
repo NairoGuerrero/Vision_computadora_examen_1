@@ -47,4 +47,4 @@ python Nombre_Modulo.py
 - **Andres Felipe Zambrano Torres** - [a.zambrano1@utp.edu.co](mailto:a.zambrano1@utp.edu.co)
 - **Fabian Esteban Quintero Arias** - [esteban.quintero@utp.edu.co](mailto:esteban.quintero@utp.edu.co)
 - **Santiago Rojas Diez** - [santiago.rojas@utp.edu.co](mailto:santiago.rojas@utp.edu.co)
-- **[Nombre del Autor 6]** - [correo6@ejemplo.com](mailto:correo6@ejemplo.com)
+- **Juan Esteban Osorio Montoya** - [juanesteban.osorio@utp.edu.co](mailto:juanesteban.osorio@utp.edu.co)
